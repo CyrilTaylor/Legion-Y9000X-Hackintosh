@@ -77,16 +77,19 @@ OpenCore Configurator中填充三码：
 
 ## 4. 功能支持详情
 
-- :white_check_mark: 解锁CFG Lock
+- :warning: 解锁CFG Lock
 - :white_check_mark: 4K内置显示器
 - :white_check_mark: 电池管理、电池电量显示
-- :warning: 合盖休眠、开盖唤醒
+- :warning: 开/合盖唤醒/休眠
+- :warning: 电源键休眠/唤醒
+- :warning: 深度休眠，以更加省电，电源键/开盖唤醒
 - :white_check_mark: CPU温度传感器
 - :warning: 3.5mm耳机
 - :warning: 内置麦克风
 - :white_check_mark: 摄像头
+- :warning: 核显1.2G满频支持
 - :warning: 显示器亮度调节（映射到`Fn+F11`、`Fn+F12`）
-- :warning: 触控板（GPIO中断方式、支持多指手势）
+- :white_check_mark: 触控板（GPIO中断方式、支持多指手势）
 - :white_check_mark: WiFi
 - :white_check_mark: 蓝牙
 - :white_check_mark: AirDrop
@@ -116,12 +119,15 @@ OpenCore Configurator中填充三码：
 |                           ..                           | HfsPlus.efi | macOS 10.15.5镜像提取 | HFS格式支持 |
 |                           ..                           | ApfsDriverLoader.efi | macOS 10.15.5镜像提取 | APFS格式支持 |
 | .. | OpenUsbKbDxe.efi | OpenCore内置 | 键盘组合键支持 |
-|                        Kexts（内核扩展）                        |       [Lilu.kext](https://github.com/acidanthera/Lilu)       |       v1.4.5        | Acidanthera驱动全家桶的底层依赖  |
+|                        Kexts（内核扩展）                        |       [Lilu.kext](https://github.com/acidanthera/Lilu)       |       v1.4.5        | Acidanthera驱动全家桶的底层依赖，需第一个加载 |
 |                           ..                           | [VirtualSMC.kext](https://github.com/acidanthera/VirtualSMC) |       V1.1.4        | 传感器驱动依赖                   |
 |                           ..                           | [WhateverGreen.kext](https://github.com/acidanthera/WhateverGreen) |       V1.4.0        | 核显&显卡驱动                    |
 |                           ..                           | [USBInjectAll.kext](https://github.com/Sniki/OS-X-USB-Inject-All) |       v0.7.1        | USB万能驱动（可使用自定制USB补丁） |
+| .. | VoodooI2C.kext/Contents/<br />PlugIns/VoodooI2CServices.kext | VoodooI2C.kext内置 | VoodooI2C.kext依赖服务，需在VoodooI2C.kext前加载 |
+| .. | VoodooI2C.kext/Contents/<br />PlugIns/VoodooGPIO.kext | VoodooI2C.kext内置 | VoodooI2C.kext依赖服务，需在VoodooI2C.kext前加载 |
+| .. | VoodooI2C.kext/Contents/<br />PlugIns/VoodooInput.kext | VoodooI2C.kext内置 | VoodooI2C.kext依赖服务，需在VoodooI2C.kext前加载 |
 |                           ..                           |   [VoodooI2C.kext](https://github.com/VoodooI2C/VoodooI2C)   |       v2.4.3        | I2C总线设备驱动                  |
-|                           ..                           |                      VoodooI2CHID.kext                       | VoodooI2C.kext内置  | I2C-HID设备驱动                  |
+|                           ..                           |                      VoodooI2CHID.kext                       | VoodooI2C.kext内置  | I2C-HID设备驱动，依赖VoodooI2C.kext，需在VoodooI2C.kext后加载 |
 |                           ..                           |                      SMCProcessor.kext                       | VirtualSMC.kext内置 | CPU核温度传感器驱动              |
 |                           ..                           |                       SMCSuperIO.kext                        | VirtualSMC.kext内置 | IO传感器驱动                     |
 |                           ..                           | [IntelMausi.kext](https://github.com/acidanthera/IntelMausi) |       V1.0.3        | Intel类千兆网卡驱动              |
@@ -141,4 +147,12 @@ OpenCore Configurator中填充三码：
 
 ## 6. 启动参数说明
 
-- 
+- -no_compat_check 关闭兼容性检查
+
+- slide=1 手动设置 KASLR slide 值为1``，需配合`Booter -> Quirks -> ProvideCustomSlide: true`一起使用
+
+- brcmfx-country=#a（已移至`DeviceProperties`）
+
+  设置WiFi国家代码为ALL，以支持全部的[WiFi信道](https://zh.wikipedia.org/wiki/WLAN信道列表)，并解锁因此导致的带宽速率限制
+  
+  ![Snipaste_2020-07-09_21-20-28](README/image-20200708184600213.png)

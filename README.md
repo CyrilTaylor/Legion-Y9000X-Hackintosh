@@ -1,5 +1,8 @@
-[![version](https://img.shields.io/github/release/CyrilTaylor/Legion-Y9000X-Hackintosh/all.svg)](https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/releases)
-[![license](https://img.shields.io/github/license/CyrilTaylor/Legion-Y9000X-Hackintosh.svg)](https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/blob/main/LICENSE)
+<p align="center">
+<a href="https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/blob/primary/LICENSE"><img alt="License" height="30em" src="https://img.shields.io/github/license/CyrilTaylor/Legion-Y9000X-Hackintosh?logo=Open-Source-Initiative&logoColor=white&style=plastic"></a>
+<a href="https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/releases/latest"><img alt="Latest Version" height="30em" src="https://img.shields.io/github/release/CyrilTaylor/Legion-Y9000X-Hackintosh/all.svg?logo=Runkeeper&color=lightgreen&logoColor=white&style=plastic"></a>
+<a href="https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/releases"><img alt="Total Download" height="30em" src="https://img.shields.io/github/downloads/CyrilTaylor/Legion-Y9000X-Hackintosh/total.svg?logo=DocuSign&logoColor=white&style=plastic"></a>
+</p>
 
 # :warning:版本尚未发布，还存在若干问题，请勿直接用于实际引导
 
@@ -10,9 +13,10 @@
 - [3. BIOS设置](#3-bios设置)
 - [4. 自定义配置](#4-自定义配置)
   - [4.1. SSD屏蔽设置](#41-ssd屏蔽设置)
-  - [4.2. 平台三码配置**（必需）**](#42-平台三码配置必需)
+  - [4.2. 平台三码配置（必需）](#42-平台三码配置必需)
   - [4.3. CFG Lock解锁配置](#43-cfg-lock解锁配置)
   - [4.4. 显示器1080P FHD版本适配](#44-显示器1080p-fhd版本适配)
+  - [4.5. 高级用户调试设置](#45-高级用户调试设置)
 - [5. 版本详情](#5-版本详情)
 - [6. 启动参数说明](#6-启动参数说明)
 
@@ -31,12 +35,13 @@
 
 - EFI测试环境
 
-|     类型     | 配置                                       |
-| :----------: | :----------------------------------------- |
-|   操作系统   | macOS 10.15.5                              |
-| 显示器分辨率 | 4K                                         |
-|   固态硬盘   | 铠侠RD10 1TB，并且屏蔽第二个磁盘位的PM981A |
-|  WiFi/蓝牙   | 博通DW1820A                                |
+|                             类型                             | 配置                                                 |
+| :----------------------------------------------------------: | :--------------------------------------------------- |
+|                           操作系统                           | macOS 10.15.6                                        |
+|                         显示器分辨率                         | UHD 4K                                               |
+|                           固态硬盘                           | 第一磁盘位铠侠RD10 1TB，并且屏蔽第二个磁盘位的PM981A |
+|                          WiFi/蓝牙                           | 博通DW1820A                                          |
+| [BIOS](https://newsupport.lenovo.com.cn/driveDownloads_detail.html?driveId=68032) | CTEC21WW                                             |
 
 ## 2. 功能支持详情
 
@@ -47,19 +52,20 @@
 - :warning: 电源键短按休眠/唤醒
 - :warning: 开启深度休眠，以更加省电，电源键/开盖唤醒
 - :white_check_mark: CPU温度传感器
-- :warning: 扬声器节点注册
-- :warning: 3.5mm耳机
-- :warning: 内置麦克风
+- :white_check_mark: 扬声器节点注册
+- :white_check_mark: 3.5mm耳机
+- :white_check_mark: 内置麦克风
 - :white_check_mark: 摄像头
 - :warning: 核显1.2G满频支持
 - :warning: 显示器亮度调节（映射到`Fn+F11`、`Fn+F12`）
-- :warning: 音量调节（映射到`Fn+F2`、`Fn+F3`）
-- :warning: 静音（映射到`Fn+F1`）
-- :warning: 暂停/播放（映射到`Fn+Home`）
+- :white_check_mark: 音量调节（映射到`Fn+F2`、`Fn+F3`）
+- :white_check_mark: 静音（映射到`Fn+F1`）
+- :white_check_mark: 暂停/播放（映射到`Fn+Home`）
 - :white_check_mark: 触控板（GPIO中断方式、支持多指手势）
 - :white_check_mark: WiFi（支持所有信道、解除速率限制）
 - :white_check_mark: 蓝牙
 - :white_check_mark: AirDrop
+- :white_check_mark: AirPlay随航
 - :white_check_mark: Type-C PD充电
 - :white_check_mark: Type-A USB3.1接口*2
 - :white_check_mark: Type-C USB接口*1
@@ -79,7 +85,7 @@
 
 - :white_check_mark: 磁盘模式设置为AHCI模式`Configuration -> Storage -> Controller Mode -> AHCI mode`
 
-  :warning: <span style="color:red"><u>**从RST(RAID0)模式切换为AHCI模式，磁盘上的所有数据会被清除，所以请提前备份好磁盘重要数据！**</u></span>
+  :heavy_exclamation_mark:  <font color='red'><u>**从RST(RAID0)模式切换为AHCI模式，磁盘上的所有数据会被清除，所以请提前备份好磁盘重要数据！**</u></font>
 
 - :white_check_mark: 关闭安全启动`Security -> Secure Boot -> Disabled`
 
@@ -89,7 +95,7 @@
 
 ### 4.1. SSD屏蔽设置
 
-  仓库默认配置没有屏蔽任何磁盘位，假如需要屏蔽磁盘位，使能指定的ACPI补丁。<span style="color:red"><u>**两个补丁最多只能使能其中一个，否则两个磁盘都将识别不出来，从而无法进入系统！**</u></span>
+  仓库默认配置没有屏蔽任何磁盘位，假如需要屏蔽磁盘位，使能指定的ACPI补丁。:heavy_exclamation_mark: <font color='red'><u>**两个补丁最多只能使能其中一个，否则两个磁盘都将识别不出来，从而无法进入系统！**</u></font>
 
   - 屏蔽第一个磁盘位（靠近风扇位置，默认不屏蔽）
 
@@ -129,11 +135,11 @@
                                     <string>SSDT-NVME2-DISABLE.aml</string>
     ```
 
-### 4.2. 平台三码配置**（必需）**
+### 4.2. 平台三码配置（必需）
 
   `OpenCore Configurator -> PlatformInfo -> Genric`
 
-  :warning: <span style="color:red">**仓库默认配置是清除了三码的，所以需要使用者填充自己的三码。**</span>仓库目前最新的Release版本里config.plist是用[OpenCore Configurator v2.6.0.2](https://mackie100projects.altervista.org/occ-changelog-version-2-6-0-0/)版本编辑的，想用OpenCore Configurator编辑并且生成三码的，则也必需用同样版本的OpenCore Configurator。
+  :heavy_exclamation_mark: <font color='red'>**仓库默认配置是清除了三码的，所以需要使用者填充自己的三码。**</font>仓库目前最新的Release版本里config.plist是用[OpenCore Configurator v2.6.0.2](https://mackie100projects.altervista.org/occ-changelog-version-2-6-0-0/)版本编辑的，想用OpenCore Configurator编辑并且生成三码的，则也必需用同样版本的OpenCore Configurator。
 
   ```diff
   diff --git a/EFI/OC/config.plist b/EFI/OC/config.plist
@@ -186,41 +192,126 @@
 
 ### 4.4. 显示器1080P FHD版本适配
 
-`OpenCore Configurator -> NVRAM -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> UIScale: 01`
+- `OpenCore Configurator -> NVRAM -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> UIScale: 01`
 
-对于1080P显示器版本，需要将`UIScale`设置为`1`
+  对于1080P显示器版本，需要将`UIScale`设置为`1`
 
-```diff
-diff --git a/EFI/OC/config.plist b/EFI/OC/config.plist
-index 5b1bfc6..0bac981 100644
---- a/EFI/OC/config.plist
-+++ b/EFI/OC/config.plist
-@@ -980,7 +1074,7 @@
-                                <key>DefaultBackgroundColor</key>
-                                <data>AAAAAA==</data>
-                                <key>UIScale</key>
--                               <data>Ag==</data>
-+                               <data>AQ==</data>
-                        </dict>
-                        <key>4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102</key>
-                        <dict>
-```
+  ```diff
+  diff --git a/EFI/OC/config.plist b/EFI/OC/config.plist
+  index 5b1bfc6..0bac981 100644
+  --- a/EFI/OC/config.plist
+  +++ b/EFI/OC/config.plist
+  @@ -980,7 +1074,7 @@
+                                  <key>DefaultBackgroundColor</key>
+                                  <data>AAAAAA==</data>
+                                  <key>UIScale</key>
+  -                               <data>Ag==</data>
+  +                               <data>AQ==</data>
+                          </dict>
+                          <key>4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102</key>
+                          <dict>
+  ```
+
+- `OpenCore Configurator -> DeviceProperties -> PciRoot(0x0)/Pci(0x2,0x0)`
+
+### 4.5. 高级用户调试设置
+
+- boot-args设置
+  
+  `OpenCore Configurator -> NVRAM -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args: slide=1 -no_compat_check -v debug=0x100 keepsyms=1`
+  
+- 开启冗余日志打印
+  - 发生kernel panic时阻止自动重启
+  - 保留debug信息
+  
+  ```diff
+  diff --git a/EFI/OC/config.plist b/EFI/OC/config.plist
+  index 0465f09..bfe902e 100644
+  --- a/EFI/OC/config.plist
+  +++ b/EFI/OC/config.plist
+  @@ -990,7 +1160,7 @@
+                          <key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
+                          <dict>
+                                  <key>boot-args</key>
+  -                               <string>slide=1 -no_compat_check</string>
+  +                               <string>slide=1 -no_compat_check -v debug=0x100 keepsyms=1</string>
+                                  <key>csr-active-config</key>
+                                <data>5wMAAA==</data>
+                                  <key>prev-lang:kbd</key>
+  ```
+  
+- 日志显示级别设置
+
+  `OpenCore Configurator -> Misc -> Debug -> Display Level: 2151678018`
+
+  `OpenCore Configurator -> Misc -> Debug -> Target: 51`
+
+  `OpenCore Configurator -> Misc -> Debug -> Disable WatchDog: true`
+
+  `OpenCore Configurator -> Misc -> Debug -> AppleDebug: true`
+
+  `OpenCore Configurator -> Misc -> Debug -> ApplePanic: true`
+
+  `OpenCore Configurator -> Misc -> Security -> Halt Level: 2147483648`
+
+  ```diff
+  diff --git a/EFI/OC/config.plist b/EFI/OC/config.plist
+  index 0465f09..bfe902e 100644
+  --- a/EFI/OC/config.plist
+  +++ b/EFI/OC/config.plist
+  @@ -868,24 +1038,24 @@
+                  <key>Debug</key>
+                  <dict>
+                          <key>AppleDebug</key>
+  -                       <false/>
+  +                       <true/>
+                          <key>ApplePanic</key>
+  -                       <false/>
+  +                       <true/>
+                          <key>DisableWatchDog</key>
+  -                       <false/>
+  +                       <true/>
+                          <key>DisplayDelay</key>
+                          <integer>0</integer>
+                          <key>DisplayLevel</key>
+  -                       <integer>0</integer>
+  +                       <integer>2151678018</integer>
+                          <key>SysReport</key>
+                          <false/>
+                          <key>Target</key>
+  -                       <integer>0</integer>
+  +                       <integer>51</integer>
+                  </dict>
+                  <key>Entries</key>
+                  <array>
+  @@ -917,9 +1087,9 @@
+                          <key>BootProtect</key>
+                          <string>None</string>
+                          <key>ExposeSensitiveData</key>
+                          <integer>3</integer>
+                          <key>HaltLevel</key>
+  -                       <integer>0</integer>
+  +                       <integer>2147483648</integer>
+                          <key>ScanPolicy</key>
+                          <integer>0</integer>
+                          <key>Vault</key>
+  ```
 
 ## 5. 版本详情
 
 - ACPI（高级配置及电源接口）补丁注入
 
-|      SSDT注入补丁      |                         SSDT替换补丁                         | 描述                                    |
-| :--------------------: | :----------------------------------------------------------: | --------------------------------------- |
-| SSDT-NVME1-DISABLE.aml |                              无                              | 屏蔽第一个磁盘位                        |
-| SSDT-NVME2-DISABLE.aml |                              无                              | 屏蔽第二个磁盘位                        |
-|      SSDT-EC.aml       |                              无                              | 仿冒EC设备                              |
-|     SSDT-GPI0.aml      | GPI0域内<br />查找：_STA (`5F 53 54 41`)<br />替换：XSTA (`58 53 54 41`) | 启用GPI0                                |
-|     SSDT-TPAD.aml      | TPAD域内<br />查找：_CRS (`5F 43 52 53`)<br />替换：XCRS (`58 43 52 53`) | 变更TPAD模式为GPIO中断模式              |
-|           无           | 查找：USTP (`55 53 54 50 08`)<br />替换：XSTP (`58 53 54 50 08`) |                                         |
-|     SSDT-ALS0.aml      |                              无                              | 仿冒环境光传感器                        |
-|     SSDT-GPRW.aml      | 查找：GPRW (`47 50 52 57 02`)<br />替换：XPRW (`58 50 52 57 02`) | 修正某些部件休眠唤醒与macOS的兼容性问题 |
-|                        |                                                              |                                         |
+|                         SSDT注入补丁                         |                         SSDT替换补丁                         | 描述                                                         |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | ------------------------------------------------------------ |
+|                    SSDT-NVME1-DISABLE.aml                    |                              无                              | 屏蔽第一个磁盘位                                             |
+|                    SSDT-NVME2-DISABLE.aml                    |                              无                              | 屏蔽第二个磁盘位                                             |
+|                         SSDT-EC.aml                          |                              无                              | 仿冒EC设备                                                   |
+|                        SSDT-GPI0.aml                         | GPI0域内：<br />查找：\_STA (`5F 53 54 41`)<br />替换：XSTA (`58 53 54 41`) | 启用GPI0                                                     |
+|                        SSDT-TPAD.aml                         | 查找：USTP (`55 53 54 50 08`)<br />替换：XSTP (`58 53 54 50 08`)<br />TPAD域内：<br />查找：\_CRS (`5F 43 52 53`)<br />替换：XCRS (`58 43 52 53`) | 变更TPAD模式为GPIO中断模式                                   |
+|                        SSDT-ALS0.aml                         |                              无                              | 仿冒环境光传感器                                             |
+|                        SSDT-GPRW.aml                         | 查找：GPRW (`47 50 52 57 02`)<br />替换：XPRW (`58 50 52 57 02`) | 修正某些部件休眠唤醒<br />与macOS的兼容性问题                |
+| [SSDT-PTSWAK.aml](https://ocbook.tlhub.cn/10-PTSWAK综合扩展补丁) | 查找：\_PTS (`5F 50 54 53 01`)<br />替换：ZPTS(1,N) (`5A 50 54 53 01`)<br />查找：\_WAK (`5F 57 41 4B 01`)<br />替换：ZWAK(1,N) (`5A 57 41 4B 01`) | - 屏蔽独显`_ON`和`_OFF`接口<br />- 扩展补丁接口`EXT1`、`EXT2`、`EXT3`、`EXT4`<br />- 定义强制睡眠传递参数 `FNOK` 和 `MODE`<br />- 定义调试参数 `TPTS` 和 `TWAK` |
+|                                                              |                                                              |                                                              |
 
 - 驱动和内核扩展
 

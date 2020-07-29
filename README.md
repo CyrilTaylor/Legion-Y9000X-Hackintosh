@@ -1,11 +1,15 @@
 <p align="center">
-<a href="https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/blob/primary/LICENSE"><img alt="License" height="30em" src="https://img.shields.io/github/license/CyrilTaylor/Legion-Y9000X-Hackintosh?logo=Open-Source-Initiative&logoColor=white&style=plastic"></a>
-<a href="https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/releases/latest"><img alt="Latest Version" height="30em" src="https://img.shields.io/github/release/CyrilTaylor/Legion-Y9000X-Hackintosh/all.svg?logo=Runkeeper&color=lightgreen&logoColor=white&style=plastic"></a>
-<a href="https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/releases"><img alt="Total Download" height="30em" src="https://img.shields.io/github/downloads/CyrilTaylor/Legion-Y9000X-Hackintosh/total.svg?logo=DocuSign&logoColor=white&style=plastic"></a>
+<a href="https://github.com/acidanthera/OpenCorePkg"><img height="120em" alt="Open Core" src="README/OpenCoreLogoApprox.svg"></a>
 </p>
+<h1 align="center">
+拯救者Y9000X 2020黑苹果OpenCore引导配置
+</h1>
 
-# :warning:版本尚未发布，还存在若干问题，请勿直接用于实际引导
-
+<p align="center">
+<a style="margin-left:0.5em; margin-right:0.5em" href="https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/blob/primary/LICENSE"><img height="30em" alt="License" src="https://img.shields.io/github/license/CyrilTaylor/Legion-Y9000X-Hackintosh?logo=Open-Source-Initiative&logoColor=white&style=plastic"></a>
+<a style="margin-left:0.5em; margin-right:0.5em" href="https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/releases/latest"><img alt="Latest Version" height="30em" src="https://img.shields.io/github/release/CyrilTaylor/Legion-Y9000X-Hackintosh/all.svg?logo=Runkeeper&color=lightgreen&logoColor=white&style=plastic"></a>
+<a style="margin-left:0.5em; margin-right:0.5em" href="https://github.com/CyrilTaylor/Legion-Y9000X-Hackintosh/releases"><img alt="Total Download" height="30em" src="https://img.shields.io/github/downloads/CyrilTaylor/Legion-Y9000X-Hackintosh/total.svg?logo=DocuSign&logoColor=white&style=plastic"></a>
+</p>
 <!-- TOC -->
 
 - [1. 硬件配置](#1-硬件配置)
@@ -366,3 +370,5 @@
 [^2]: [OpenCore 部件补丁](https://ocbook.tlhub.cn)
 
 [^3]: [github | WangRicky/Y9000X-HACKINTOSH](https://github.com/WangRicky/Y9000X-HACKINTOSH)
+
+[^4]: [OpenCore从Recovery的DMG安装macOS各种版本](https://github.com/cattyhouse/oc-guide/blob/master/oc-dmg-install.md)

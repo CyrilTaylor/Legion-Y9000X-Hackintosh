@@ -1,7 +1,7 @@
 ---
 name: "[BUG] 标题"
 about: 发现问题，快来向我们反馈
-title: "[BUG] 请准备概述问题作为标题"
+title: "[BUG] 请准确概述问题作为标题"
 labels: bug
 assignees: CyrilTaylor
 
